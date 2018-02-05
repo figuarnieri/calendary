@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendary</title>
+  <style>
+    .wrap{width: 300px;margin: 0 auto;position: relative;}
+    .my-calendar{width: 300px;}
+    .telas{width: 50vw;height: 50vh;position: absolute;}
+    .telas-1{left: 0;top: 0;}
+    .telas-2{right: 0;top: 0;}
+    .telas-3{left: 0;bottom: 0;}
+    .telas-4{right: 0;bottom: 0;}
+    body{height: 1000px;}
+    input{margin: 10px;}
+    body:before{content: '';position: fixed;top: 0;left: 50%;height: 100%;width: 1px;background-color: #f00;}
+    body:after{content: '';position: fixed;top: 50%;left: 0;height: 1px;width: 100%;background-color: #f00;}
+
+    .calendary{padding: 5px;font-family: Arial;border: 1px solid #ddd;border-radius: 4px;text-align: center;background-color: #fff;user-select: none;-webkit-user-drag: none;user-drag: none;}
+    .calendary__float:before, .calendary__float:after{content: '';position: absolute;border: 10px solid transparent;}
+    .calendary__float:before{border: 10px solid transparent;}
+    .calendary__float:after{border: 9px solid transparent;}
+    .calendary__axis{position: absolute;background-color: #f00;z-index: 9;}
+    .calendary__axis .calendary{position: absolute;min-width: 300px;}
+    .calendary__axis-left{left: 0;}
+    .calendary__axis-left:before{left: 10px;}
+    .calendary__axis-left:after{left: 11px;}
+    .calendary__axis-right{right: 0;}
+    .calendary__axis-right:before{right: 10px;}
+    .calendary__axis-right:after{right: 11px;}
+    .calendary__axis-top{top: 10px;}
+    .calendary__axis-top:before{border-bottom-color: #ddd;bottom: 100%;}
+    .calendary__axis-top:after{border-bottom-color: #fff;bottom: 100%;}
+    .calendary__axis-bottom{bottom: 10px;}
+    .calendary__axis-bottom:before{border-top-color: #ddd;top: 100%;}
+    .calendary__axis-bottom:after{border-top-color: #fff;top: 100%;}
+    .calendary__header, .calendary__week, .calendary__content{display: flex;flex-wrap: wrap;justify-content: space-between;}
+    .calendary__square, .calendary__button{width: 14.2857142857%;}
+    .calendary__header{margin-bottom: 5px;}
+    .calendary__button{position: relative;background-color: transparent;border-style: none;cursor: pointer;border-radius: 4px;}
+    .calendary__button:hover, .calendary__button:focus{background-color: #eee;}
+    .calendary__button:before{content: '';width: 6px;height: 6px;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%) rotate(45deg);}
+    .calendary__button-prev:before{border-left: 2px solid #666;border-bottom: 2px solid #666;}
+    .calendary__button-next:before{border-right: 2px solid #666;border-top: 2px solid #666;}
+    .calendary__year{text-transform: capitalize;font-size: 20px;font-weight: bold;color: #666;}
+    .calendary__week{margin-bottom: 1px;}
+    .calendary__content{background-color: #eee;}
+    .calendary__inactive{color: #ccc;}
+    .calendary__square-week{background-color: #a00;color: #fff;line-height: 20px;font-size: 10px;}
+    .calendary__square-day{line-height: 30px;font-size: 15px;border-radius: 3px;}
+    .calendary__square-today{background-color: #e6e6e6;position: relative;}
+    .calendary__square-today:before{content: '';position: absolute;right: 0;bottom: 0;border: 5px solid transparent;border-bottom-color: #a00;border-right-color: #a00;}
+  </style>
+</head>
+<body>
+  <div class="telas telas-1">
+    <div class="wrap">
+      <div data-calendary=""></div>
+    </div>
+  </div>
+  <div class="telas telas-2">
+    <div class="wrap">
+      <input data-calendary type="date" name="" id="">
+    </div>
+  </div>
+  <div class="telas telas-3">
+    <div class="wrap">
+      <input data-calendary type="text" name="" id="">
+    </div>
+  </div>
+  <div class="telas telas-4">
+    <div class="wrap">
+      <div data-calendary=""></div>
+    </div>
+  </div>
+  <script src="calendary.min.js"></script>
+  <script>
+    new Calendary({
+      tag: '[data-calendary]',
+      todayTitle: 'Hoje',
+      /*date: '2017-02-02',*/
+      i18n: 'pt'
+    });
+  </script>
+</body>
+</html>
