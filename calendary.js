@@ -83,7 +83,8 @@ class Calendary{
     _today = tag.querySelector('.calendary__square-today');
     tag.querySelector('.calendary__year').textContent = `${this.date.toLocaleString(this.i18n, {month: 'long'})} ${this.date.getFullYear()}`;
     if(_today){
-      _today.removeAttr('title');
+    console.log(_today);
+      _today.removeAttribute('title');
       _today.classList.remove('calendary__square-today');
     }
     this.classInactive = 1;
