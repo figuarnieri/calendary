@@ -1,2 +1,2 @@
-# calendary
-Calendary JS is Vanilla Datepicker
+# Calendary - Vanilla Datepicker
+Simple Vanilla Datepicker (only 6k CSS + JS)

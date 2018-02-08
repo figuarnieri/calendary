@@ -1,5 +1,6 @@
 class Calendary{
   constructor(...proprities){
+    console.log(typeof this);
     this.tag = proprities[0];
     this.date = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
     this.i18n = navigator.language;
@@ -47,6 +48,7 @@ class Calendary{
     _day = this.day = new Date(this.date.getFullYear(), this.date.getMonth(), tag.textContent);
     if(tag.classList.contains('calendary__square-day') && !tag.classList.contains('calendary__inactive')){
       if(_input.type==='date'){
+        console.log(_day.toLocaleString('zh-TW'));
         _input.value = `${_day.getFullYear()}-${_day.toLocaleString('en', {month: '2-digit'})}-${_day.toLocaleString('en', {day: '2-digit'})}`;
       } else {
         _input.value = _day.toLocaleString(this.i18n, {year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -94,7 +96,6 @@ class Calendary{
       _square = tag.querySelectorAll('.calendary__square-day')[i];
       _square.classList.remove('calendary__inactive');
       if(this.day.getTime() === _time.getTime()){
-        console.log(this.todayTitle);
         _square.title = this.todayTitle;
         _square.classList.add('calendary__square-today');
       }

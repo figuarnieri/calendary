@@ -2,83 +2,80 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Calendary</title>
-  <style>
-    .wrap{width: 300px;margin: 0 auto;position: relative;}
-    .my-calendar{width: 300px;}
-    .telas{width: 50vw;height: 50vh;position: absolute;}
-    .telas-1{left: 0;top: 0;}
-    .telas-2{right: 0;top: 0;}
-    .telas-3{left: 0;bottom: 0;}
-    .telas-4{right: 0;bottom: 0;}
-    body{height: 1000px;}
-    input{margin: 10px;}
-    body:before{content: '';position: fixed;top: 0;left: 50%;height: 100%;width: 1px;background-color: #f00;}
-    body:after{content: '';position: fixed;top: 50%;left: 0;height: 1px;width: 100%;background-color: #f00;}
+  <title>Calendary - Vanilla Datepicker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="calendary.min.css">
+  <style type="text/css">
+    @keyframes bg-degrade{
+      0%{transform: rotate(0deg)}
+      100%{transform: rotate(360deg)}
+    }
+    @keyframes logo{
+      0%{stroke-dashoffset: 1170px;}
+      100%{stroke-dashoffset: -50px;}
+    }
+    @keyframes logo-opacity{
+      0%{opacity: 0;}
+      100%{opacity: 1;}
+    }
+    *{margin: 0;padding: 0;box-sizing: border-box;}
 
-    .calendary{padding: 5px;font-family: Arial;border: 1px solid #ddd;border-radius: 4px;text-align: center;background-color: #fff;user-select: none;-webkit-user-drag: none;user-drag: none;}
-    .calendary__float:before, .calendary__float:after{content: '';position: absolute;border: 10px solid transparent;}
-    .calendary__float:before{border: 10px solid transparent;}
-    .calendary__float:after{border: 9px solid transparent;}
-    .calendary__axis{position: absolute;background-color: #f00;z-index: 9;}
-    .calendary__axis .calendary{position: absolute;min-width: 300px;}
-    .calendary__axis-left{left: 0;}
-    .calendary__axis-left:before{left: 10px;}
-    .calendary__axis-left:after{left: 11px;}
-    .calendary__axis-right{right: 0;}
-    .calendary__axis-right:before{right: 10px;}
-    .calendary__axis-right:after{right: 11px;}
-    .calendary__axis-top{top: 10px;}
-    .calendary__axis-top:before{border-bottom-color: #ddd;bottom: 100%;}
-    .calendary__axis-top:after{border-bottom-color: #fff;bottom: 100%;}
-    .calendary__axis-bottom{bottom: 10px;}
-    .calendary__axis-bottom:before{border-top-color: #ddd;top: 100%;}
-    .calendary__axis-bottom:after{border-top-color: #fff;top: 100%;}
-    .calendary__header, .calendary__week, .calendary__content{display: flex;flex-wrap: wrap;justify-content: space-between;}
-    .calendary__square, .calendary__button{width: 14.2857142857%;}
-    .calendary__header{margin-bottom: 5px;}
-    .calendary__button{position: relative;background-color: transparent;border-style: none;cursor: pointer;border-radius: 4px;}
-    .calendary__button:hover, .calendary__button:focus{background-color: #eee;}
-    .calendary__button:before{content: '';width: 6px;height: 6px;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%) rotate(45deg);}
-    .calendary__button-prev:before{border-left: 2px solid #666;border-bottom: 2px solid #666;}
-    .calendary__button-next:before{border-right: 2px solid #666;border-top: 2px solid #666;}
-    .calendary__year{text-transform: capitalize;font-size: 20px;font-weight: bold;color: #666;}
-    .calendary__week{margin-bottom: 1px;}
-    .calendary__content{background-color: #eee;}
-    .calendary__inactive{color: #ccc;}
-    .calendary__square-week{background-color: #a00;color: #fff;line-height: 20px;font-size: 10px;}
-    .calendary__square-day{line-height: 30px;font-size: 15px;border-radius: 3px;}
-    .calendary__square-today{background-color: #e6e6e6;position: relative;}
-    .calendary__square-today:before{content: '';position: absolute;right: 0;bottom: 0;border: 5px solid transparent;border-bottom-color: #a00;border-right-color: #a00;}
+    .stage{display: flex;height: 90vh;align-items: center;position: relative;overflow: hidden;}
+    .stage--bg{position: absolute;z-index: -1;top: 0;left: 0;height: 100%;width: 100%;background-image: linear-gradient(to bottom, #fff 0%, #eee 100%);}
+    .stage--bg:before{content: '';height: 200vw;width: 100vw;position: absolute;animation: bg-degrade 10s linear infinite;transform-origin: 50% 50%;
+    background-color: rgba(0,0,0,.1);filter: blur(100px);border-radius: 30%;}
+    .stage--logo{width: 100%;}
+    .logo{width: 300px;display: block;margin: 0 auto;}
+    .logo .border{fill:#fff;stroke: #000;stroke-width: 10px;stroke-dasharray: 1170px;stroke-dashoffset: 1170px;animation: logo 1s 1s forwards;}
+    .logo .st1, .logo .st2{animation-fill-mode: forwards;animation-duration: 0.5s;animation-name: logo-opacity;opacity: 0;}
+    .logo .st1{fill:#a00;}
+    .logo .st2{fill:#333;}
+    .logo .st1:nth-child(1){animation-delay: 0.1s;}
+    .logo .st1:nth-child(2){animation-delay: 0.2s;}
+    .logo .st1:nth-child(3){animation-delay: 0.3s;}
+    .logo .st2:nth-child(1){animation-delay: 0.4s;}
+    .logo .st2:nth-child(2){animation-delay: 0.5s;}
+    .logo .st2:nth-child(3){animation-delay: 0.6s;}
+    .logo .st2:nth-child(4){animation-delay: 0.7s;}
+    .logo .st2:nth-child(5){animation-delay: 0.8s;}
+    .logo .st2:nth-child(6){animation-delay: 0.9s;}
+    .logo .st1:nth-child(7){animation-delay: 2.2s;}
+    .content{width: 90%;max-width: 400px;margin: 0 auto;padding: 20px 0;}
   </style>
 </head>
 <body>
-  <div class="telas telas-1">
-    <div class="wrap">
-      <div data-calendary=""></div>
+  <div class="stage">
+    <div class="stage--bg"></div>
+    <div class="stage--logo">
+      <svg class="logo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265 334">
+        <polygon class="border" points="46.1,290 5,290 5,35.7 36.2,35.7 36.2,12.6 45.7,6.1 55.4,12.6 55.4,35.7 209,35.7 209,12.7 219.2,6 229.2,12.5 229.3,35.7 260,35.7 260,290 78.2,290 46.1,322  "/>
+        <g>
+          <path class="st1" d="M63.5,85l-3.7,3.6c-2.5-2.7-5.4-4-8.6-4c-2.7,0-5,0.9-6.8,2.8c-1.8,1.8-2.8,4.1-2.8,6.8c0,1.9,0.4,3.5,1.2,5 c0.8,1.5,2,2.6,3.5,3.4s3.1,1.2,5,1.2c1.6,0,3-0.3,4.3-0.9s2.7-1.6,4.2-3.2l3.6,3.8c-2.1,2-4,3.4-5.9,4.2c-1.9,0.8-4,1.2-6.3,1.2 c-4.4,0-8-1.4-10.7-4.2c-2.8-2.8-4.2-6.3-4.2-10.7c0-2.8,0.6-5.3,1.9-7.5c1.3-2.2,3.1-3.9,5.5-5.3c2.4-1.3,4.9-2,7.6-2 c2.3,0,4.6,0.5,6.7,1.5C60.1,81.8,61.9,83.2,63.5,85z"/>
+          <path class="st1" d="M131.4,80.1h5.4l10.8,28.2h-5.6l-2.2-5.8h-11.5l-2.3,5.8h-5.6L131.4,80.1z M134.1,87.5l-3.8,9.7h7.5L134.1,87.5 z"/>
+          <path class="st1" d="M206.3,80.1h5.4v23h7.8v5.1h-13.2V80.1z"/>
+        </g>
+        <g>
+          <path class="st2" d="M39.8,143.6h15.4v5.2h-10v5.1h10v5.1h-10v7.4h10v5.3H39.8V143.6z"/>
+          <path class="st2" d="M119.2,143.6h5.1l12,18.5v-18.5h5.4v28.2h-5.2l-12-18.5v18.5h-5.4V143.6z"/>
+          <path class="st2" d="M207.3,143.6h6.3c4.1,0,7.1,0.5,9.1,1.5c2,1,3.6,2.7,4.9,4.9c1.3,2.3,1.9,5,1.9,8c0,2.2-0.4,4.2-1.1,6 s-1.7,3.3-3,4.5c-1.3,1.2-2.6,2-4.1,2.5c-1.5,0.5-4,0.7-7.7,0.7h-6.4V143.6z M212.7,148.8v17.8h2.5c2.4,0,4.2-0.3,5.3-0.8 c1.1-0.6,2-1.5,2.7-2.8c0.7-1.3,1.1-3,1.1-4.9c0-3-0.8-5.3-2.5-7c-1.5-1.5-3.9-2.2-7.3-2.2H212.7z"/>
+          <path class="st2" d="M46.2,211.2h5.4l10.8,28.2h-5.6l-2.2-5.8H43.2l-2.3,5.8h-5.6L46.2,211.2z M49,218.6l-3.8,9.7h7.5L49,218.6z"/>
+          <path class="st2" d="M121.9,211.2h5.7c3.1,0,5.3,0.3,6.6,0.8c1.3,0.6,2.4,1.5,3.2,2.8c0.8,1.3,1.2,2.8,1.2,4.6 c0,1.8-0.4,3.4-1.3,4.6c-0.9,1.2-2.2,2.2-4,2.8l6.7,12.5h-5.9l-6.3-11.9h-0.5v11.9h-5.4V211.2z M127.3,222.2h1.7 c1.7,0,2.9-0.2,3.5-0.7c0.6-0.4,1-1.2,1-2.2c0-0.6-0.2-1.1-0.5-1.6c-0.3-0.5-0.7-0.8-1.3-1c-0.5-0.2-1.5-0.3-2.9-0.3h-1.5V222.2z"/>
+          <path class="st2" d="M197.3,211.2h5.8l5.3,10.1l5.2-10.1h5.7l-8.2,16v12.2h-5.4v-12.2L197.3,211.2z"/>
+          <polygon class="st1" points="229.8,238 220.5,247.3 229.8,247.3 "/>
+        </g>
+      </svg>
     </div>
   </div>
-  <div class="telas telas-2">
-    <div class="wrap">
-      <input data-calendary type="date" name="" id="">
-    </div>
+  <div class="content">
+    <div data-calendary=""></div>
   </div>
-  <div class="telas telas-3">
-    <div class="wrap">
-      <input data-calendary type="text" name="" id="">
-    </div>
-  </div>
-  <div class="telas telas-4">
-    <div class="wrap">
-      <div data-calendary=""></div>
-    </div>
-  </div>
+
   <script src="calendary.min.js"></script>
   <script>
     new Calendary({
       tag: '[data-calendary]',
       todayTitle: 'Hoje',
-      /*date: '2017-02-02',*/
+      date: '2018-01-01',
       i18n: 'pt'
     });
   </script>
