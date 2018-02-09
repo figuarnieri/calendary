@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <title>Calendary - Vanilla Datepicker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Flamenco" rel="stylesheet">
   <link rel="stylesheet" href="calendary.min.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style type="text/css">
     @keyframes bg-degrade{
       0%{transform: rotate(0deg)}
@@ -19,35 +22,47 @@
       100%{opacity: 1;}
     }
     *{margin: 0;padding: 0;box-sizing: border-box;}
-
+    body{font-family: 'Flamenco', Arial, sans-serif;}
     .stage{display: flex;height: 90vh;align-items: center;position: relative;overflow: hidden;}
-    .stage--bg{position: absolute;z-index: -1;top: 0;left: 0;height: 100%;width: 100%;background-image: linear-gradient(to bottom, #fff 0%, #eee 100%);}
+    .stage--bg{position: absolute;z-index: -1;top: 0;left: 0;height: 100%;width: 100%;background-image: linear-gradient(to bottom, #fff 0%, #ddd 100%);}
     .stage--bg:before{content: '';height: 200vw;width: 100vw;position: absolute;animation: bg-degrade 10s linear infinite;transform-origin: 50% 50%;
     background-color: rgba(0,0,0,.1);filter: blur(100px);border-radius: 30%;}
-    .stage--logo{width: 100%;}
-    .logo{width: 300px;display: block;margin: 0 auto;}
-    .logo .border{fill:#fff;stroke: #000;stroke-width: 10px;stroke-dasharray: 1170px;stroke-dashoffset: 1170px;animation: logo 1s 1s forwards;}
-    .logo .st1, .logo .st2{animation-fill-mode: forwards;animation-duration: 0.5s;animation-name: logo-opacity;opacity: 0;}
-    .logo .st1{fill:#a00;}
-    .logo .st2{fill:#333;}
-    .logo .st1:nth-child(1){animation-delay: 0.1s;}
-    .logo .st1:nth-child(2){animation-delay: 0.2s;}
-    .logo .st1:nth-child(3){animation-delay: 0.3s;}
-    .logo .st2:nth-child(1){animation-delay: 0.4s;}
-    .logo .st2:nth-child(2){animation-delay: 0.5s;}
-    .logo .st2:nth-child(3){animation-delay: 0.6s;}
-    .logo .st2:nth-child(4){animation-delay: 0.7s;}
-    .logo .st2:nth-child(5){animation-delay: 0.8s;}
-    .logo .st2:nth-child(6){animation-delay: 0.9s;}
-    .logo .st1:nth-child(7){animation-delay: 2.2s;}
-    .content{width: 90%;max-width: 400px;margin: 0 auto;padding: 20px 0;}
+    .stage--content{width: 100%;}
+    .stage--subtitle{text-align: center;font-size: 30px;}
+    .stage--size{color: #a00;font-weight: lighter;}
+    .stage--size-number{font-weight: bold;}
+    .stage--logo{width: 300px;display: block;margin: 0 auto;}
+    .stage--logo .border{fill:#fff;stroke: #000;stroke-width: 10px;stroke-dasharray: 1170px;stroke-dashoffset: 1170px;animation: logo 1s 1s forwards;}
+    .stage--logo .st1, .stage--logo .st2{animation-fill-mode: forwards;animation-duration: 0.5s;animation-name: logo-opacity;opacity: 0;}
+    .stage--logo .st1{fill:#a00;}
+    .stage--logo .st2{fill:#333;}
+    .stage--logo .st1:nth-child(1){animation-delay: 0.1s;}
+    .stage--logo .st1:nth-child(2){animation-delay: 0.2s;}
+    .stage--logo .st1:nth-child(3){animation-delay: 0.3s;}
+    .stage--logo .st2:nth-child(1){animation-delay: 0.4s;}
+    .stage--logo .st2:nth-child(2){animation-delay: 0.5s;}
+    .stage--logo .st2:nth-child(3){animation-delay: 0.6s;}
+    .stage--logo .st2:nth-child(4){animation-delay: 0.7s;}
+    .stage--logo .st2:nth-child(5){animation-delay: 0.8s;}
+    .stage--logo .st2:nth-child(6){animation-delay: 0.9s;}
+    .stage--logo .st1:nth-child(7){animation-delay: 2.2s;}
+    .content{width: 90%;max-width: 1200px;margin: 0 auto;padding: 40px 0;}
+    .content p{font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;font-size: 20px;line-height: 1.6em;margin-bottom: 10px;}
+    .content--h1{font-size: 50px;font-weight: bold;margin-bottom: 20px;}
+    .content--h2{font-size: 40px;font-weight: bold;}
+    .code{background-color: #222;display: block;padding: 5px;color: #fff;border-radius: 3px;white-space: pre;}
+    .code--tag{color: #f92672;}
+    .code--attr{color: #a6e22e;}
+    .code--value{color: #e6db74;}
+    .code--important{color: #66d9ef;font-weight: bold;font-style: italic;}
+
   </style>
 </head>
 <body>
   <div class="stage">
     <div class="stage--bg"></div>
-    <div class="stage--logo">
-      <svg class="logo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265 334">
+    <div class="stage--content">
+      <svg class="stage--logo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265 334">
         <polygon class="border" points="46.1,290 5,290 5,35.7 36.2,35.7 36.2,12.6 45.7,6.1 55.4,12.6 55.4,35.7 209,35.7 209,12.7 219.2,6 229.2,12.5 229.3,35.7 260,35.7 260,290 78.2,290 46.1,322  "/>
         <g>
           <path class="st1" d="M63.5,85l-3.7,3.6c-2.5-2.7-5.4-4-8.6-4c-2.7,0-5,0.9-6.8,2.8c-1.8,1.8-2.8,4.1-2.8,6.8c0,1.9,0.4,3.5,1.2,5 c0.8,1.5,2,2.6,3.5,3.4s3.1,1.2,5,1.2c1.6,0,3-0.3,4.3-0.9s2.7-1.6,4.2-3.2l3.6,3.8c-2.1,2-4,3.4-5.9,4.2c-1.9,0.8-4,1.2-6.3,1.2 c-4.4,0-8-1.4-10.7-4.2c-2.8-2.8-4.2-6.3-4.2-10.7c0-2.8,0.6-5.3,1.9-7.5c1.3-2.2,3.1-3.9,5.5-5.3c2.4-1.3,4.9-2,7.6-2 c2.3,0,4.6,0.5,6.7,1.5C60.1,81.8,61.9,83.2,63.5,85z"/>
@@ -64,10 +79,20 @@
           <polygon class="st1" points="229.8,238 220.5,247.3 229.8,247.3 "/>
         </g>
       </svg>
+      <div class="stage--subtitle">No Dependences, Easy Setup, Mobile Compatibility and <strong class="stage--size">only <span class="stage--size-number">6 kb</span></strong></div>
     </div>
   </div>
   <div class="content">
-    <div data-calendary=""></div>
+    <h1 class="content--h1">Calendary - Vanilla Datepicker</h1>
+    <p class="content--p">A Javascript library without a dependency of jQuery, Zepto, and etc ... Very simple to install and use. With only 6kb (minified) code, it's also well accepted on mobile devices</p>
+    <div class="content--block">
+      <h2 class="content--h2">Install / Usage</h2>
+      <p>Add Calendary files</p>
+      <code class="code"><span data-clipboard>&lt;<span class="code--tag">script</span> <span class="code--attr">src</span>=<span class="code--value">"https://cdn.rawgit.com/figuarnieri/calendary/master/calendary.min.js"</span>&gt;&lt;/<span class="code--tag">script</span>&gt;</span>
+or
+<span data-clipboard>&lt;<span class="code--tag">script</span> <span class="code--attr">src</span>=<span class="code--value">"path/js/calendary.min.js"</span>&gt;&lt;/<span class="code--tag">script</span>&gt;</code>
+    </div>
+    <!-- <div data-calendary=""></div> -->
   </div>
 
   <script src="calendary.min.js"></script>
