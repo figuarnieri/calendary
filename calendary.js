@@ -1,6 +1,5 @@
 class Calendary{
   constructor(...proprities){
-    console.log(typeof this);
     this.tag = proprities[0];
     this.date = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
     this.i18n = navigator.language;
@@ -12,9 +11,9 @@ class Calendary{
       this.i18n = proprities[0].i18n || this.i18n;
       this.todayTitle = proprities[0].todayTitle || this.todayTitle;
     }
-    document.querySelectorAll(this.tag).forEach(item => {
-      this.init(item);
-    });
+
+    document.querySelectorAll(this.tag).forEach(item => this.init(item));
+
     document.addEventListener('click', (e) => {
       const _tag = e.target;
       if(_tag.classList.contains('calendary--input') || _tag.closest('.calendary')){
