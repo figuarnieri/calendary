@@ -61,7 +61,7 @@ class Calendary{
     _axisY = _rect.top < window.innerHeight/2 ? _rect.top + _rect.height : _rect.top,
     _sideX = _rect.left < window.innerWidth/2 ? 'left' : 'right',
     _sideY = _rect.top < window.innerHeight/2 ? 'top' : 'bottom';
-    document.body.insertAdjacentHTML('beforeend',`<div class="calendary__axis" style="left: ${_axisX}px;top: ${_axisY}px"><div class="calendary__float calendary__axis-${_sideX} calendary__axis-${_sideY}"></div></div>`);
+    document.body.insertAdjacentHTML('beforeend',`<div class="calendary__axis" style="left: ${_axisX}px;top: ${_axisY + window.scrollY}px"><div class="calendary__float calendary__axis-${_sideX} calendary__axis-${_sideY}"></div></div>`);
     const _float = document.querySelector('.calendary__float');
     this.build(_float);
     this.update(_float);
